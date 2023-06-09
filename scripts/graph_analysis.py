@@ -14,17 +14,17 @@ import argparse
 logging.basicConfig(filename=f"{output_dir}/log.txt",
     format='%(asctime)s %(message)s',
     level=logging.DEBUG,
-    datefmt='%Y-%m-%d %H:%M:%S %Z')
+    datefmt='%d-%m-%Y %H:%M:%S %Z')
 def log_func(var_dict):
-	new = {key:type(value) for key, value in var_dict.items()}
-	return new
-	
+    new = {key:type(value) for key, value in var_dict.items()}
+    return new
+    
 #-----------------------------------------------------------------------------------------------------------------
 
 
 # Generate graphs and extract metrics
 
-thresholds = np.arange(55,96, 1)
+thresholds = np.arange(35, 95, 1)
 
 demographics = pd.read_csv(f"{data_dir}/Demographics.csv", index_col="SubjID")
 zscores = pd.read_csv(f"{data_dir}/Data_zscores.csv", index_col="SubjID")
@@ -45,7 +45,7 @@ def get_metrics(M, thr, nodes):
     
     B = nx.from_numpy_matrix(M)
     B = nx.relabel_nodes(B, dict(zip(B, nodes)))
-    B = nx.algorithms.full_diagnostics(B, swi=True, swi_niter=100, swi_nrand=10, swi_seed=None, n_jobs=nj, prefer=None)
+    B = nx.algorithms.full_diagnostics(B, swi=True, swi_niter=10, swi_nrand=1, swi_seed=None, n_jobs=nj, prefer=None)
     
     attributes = B.nodes[nodes[0]].keys()
     metric_dict = {metric: nx.get_node_attributes(B, metric) for metric in attributes}
