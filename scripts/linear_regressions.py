@@ -11,13 +11,14 @@ from sklearn.linear_model import LinearRegression
 import logging
 import argparse
 
+
 logging.basicConfig(filename=f"{output_dir}/log.txt",
     format='%(asctime)s %(message)s',
     level=logging.DEBUG,
-    datefmt='%Y-%m-%d %H:%M:%S %Z')
+    datefmt='%d-%m-%Y %H:%M:%S %Z')
 def log_func(var_dict):
-	new = {key:type(value) for key, value in var_dict.items()}
-	return new
+    new = {key:type(value) for key, value in var_dict.items()}
+    return new
 	
 #-----------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +29,8 @@ import statsmodels.formula.api as sm
 
 
 demographics = pd.read_csv(f"{data_dir}/Demographics.csv", index_col="SubjID")
-gmetrics = pd.read_csv(f"{output_dir}/Graph_metrics.csv", index_col="SubjID")[demographics.Dx3==2]
+gmetrics = pd.read_csv(f"{output_dir}/Graph_metrics.csv", index_col="SubjID")
+gmetrics = gmetrics.loc[demographics.index[demographics.Dx3==2]]
 global_metrics = gmetrics.columns[gmetrics.columns.str.startswith('global')]
 
 def modeldata(formula, data):
@@ -62,7 +64,6 @@ for Kmin, Kmax in K_ranges:
 
     regression_table['Kmin'] = Kmin
     regression_table['Kmax'] = Kmax
-    
     regression_table.to_csv(f"{output_dir}/Regressions_K{Kmin}-{Kmax}.csv")
         
         
