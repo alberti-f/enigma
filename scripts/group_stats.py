@@ -14,10 +14,10 @@ import argparse
 logging.basicConfig(filename=f"{output_dir}/log.txt",
     format='%(asctime)s %(message)s',
     level=logging.DEBUG,
-    datefmt='%Y-%m-%d %H:%M:%S %Z')
+    datefmt='%d-%m-%Y %H:%M:%S %Z')
 def log_func(var_dict):
-	new = {key:type(value) for key, value in var_dict.items()}
-	return new
+    new = {key:type(value) for key, value in var_dict.items()}
+    return new
 	
 #-----------------------------------------------------------------------------------------------------------------
 
