@@ -1,6 +1,6 @@
 # Import dependencies
 
-from directories import data_dir, covariates, thickness, volume, output_dir, nj
+from directories import log_config, log_func, data_dir, covariates, thickness, volume, output_dir, nj
 import pandas as pd
 import numpy as np
 from joblib import Parallel, delayed
@@ -11,15 +11,8 @@ from sklearn.linear_model import LinearRegression
 import logging
 import argparse
 
+log_config()
 
-logging.basicConfig(filename=f"{output_dir}/log.txt",
-    format='%(asctime)s %(message)s',
-    level=logging.DEBUG,
-    datefmt='%d-%m-%Y %H:%M:%S %Z')
-def log_func(var_dict):
-    new = {key:type(value) for key, value in var_dict.items()}
-    return new
-	
 #-----------------------------------------------------------------------------------------------------------------
 
 
