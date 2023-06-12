@@ -9,7 +9,7 @@ nj = -1
 
 def log_config():
     import logging
-    logging.basicConfig(filename=f"{output_dir}/logfile.txt",
+    logging.basicConfig(filename=f"{output_dir}/log.txt",
         format='%(asctime)s %(message)s',
         level=logging.DEBUG,
         datefmt='%d-%m-%Y %H:%M:%S %Z')
