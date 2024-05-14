@@ -75,25 +75,17 @@ Now you are ready to build the Docker image and run the analyses:
   docker compose up         # build docker image and launch analysis scripts
 ```
 
-## 5. Compress and share the output folder with the Authors for meta-analysis
-At the end of the image build process, the analisis script will run and generate several output files in the `output` directory.
-  1. Compress the the folder
-  ```bash
-    cd /full/path/to/enigma   # change directory to the enigma folder
-    tar -czf analysis_output.tar ./output
-  ```
-  2. Share the `analysis_output.tar` with our team via email at **enrico.collantoni+ENIGMARES@unipd.it**
-  3. (Optional) Repeat the processo to compress and share the `data` folder to provide us with additional information for possible additional analyses.
-  ```bash
-    tar -czf supplementary_data.tar ./data
-   ```
+## 5. Share the compressed output folder with the Authors for meta-analysis
+At the end of the image build process, the analisis script will run and generate several output files in the `output` directory. Among them, you will find also a compressed copy of output `output.tar.gz`.
+Please share this folder with our team sending it to:
+**enrico.collantoni@unipd.it**
 
 
 
 ## Support
 For support, please contact us at:
-  * **enrico.collantoni+ENIGMAQA@unipd.it**
-  * **francesco.alberti+ENIGMAQA@unipd.it**
+  * **enrico.collantoni@unipd.it**
+  * **francesco.alberti@etu.u-paris.fr**
 
 
 ## License
