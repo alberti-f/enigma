@@ -18,4 +18,4 @@ python3 /home/scripts/linear_regressions.py
 chmod -R --silent 777 /home/output
 chmod -R --silent 777 /home/data
 
-tar -czvf ./output/output.tar.gz ./output
+tar -czvf output/output.tar.gz output
