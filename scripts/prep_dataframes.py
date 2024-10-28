@@ -22,6 +22,12 @@ demographics = pd.read_csv(covariates, index_col="SubjID")
 dashless_columns = pd.Series(demographics.columns.str.split('_')).apply(lambda x: ''.join(str.capitalize(s) for s in x))
 demographics.rename(columns=dict(zip(demographics.columns, dashless_columns)), inplace=True)
 
+if not (demographics[["Age", "Hand"]].notna().sum() > 1).all():
+    raise ValueError("The dataset seems to contain less than 2 subjects with non-missing values for Age and Handedness."
+                     + "\nThe these variables are used to controll for possible confounding effects in the analyses,"
+                     + "and only participants for whom this data is available are included."
+                     + " Fewer than 2 such subjects would make the analyses impossible to perform.")
+
 demographics.loc[demographics.Subtype.isna(), 'Subtype'] = 0
 demographics['Minor'] = np.int32(demographics.Age<18.)
 demographics['Durill3'] = np.int32(demographics.Durill<3.)

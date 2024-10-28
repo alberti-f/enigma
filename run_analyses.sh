@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Run analyses
 python3 /home/scripts/prep_dataframes.py
