@@ -44,7 +44,7 @@ Additional information can be found on the official [Docker Desktop documentatio
   panel:
     build:
       args:
-        user: {YOUR-USER-NAME}
+        user: "YOUR-USER-NAME"
 .
 .
 ```
