@@ -27,7 +27,7 @@ brain_regions = zscores.columns
 
 def joint_variation(v):
     warnings.filterwarnings('ignore')
-    if ~isinstance(v, np.ndarray):
+    if not isinstance(v, np.ndarray):
         v = np.asanyarray(v)
     JV = np.array([ 1 / np.exp((v - i) ** 2) for i in v])
     np.fill_diagonal(JV, 0)
