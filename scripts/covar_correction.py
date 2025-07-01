@@ -18,13 +18,14 @@ log_config()
 
 # Correct for covariates
 
-covariate_columns = ['Age', 'Hand', 'Icv']
+covariate_columns = ['Age', 'Icv']
 
-def covar_correct(X, Y, data, n_jobs=nj):
-    
-    def get_resid(X, y, data, n_jobs=n_jobs):
+def get_resid(X, y, data, n_jobs=1):
+        
         r = data[y] - LinearRegression(n_jobs=n_jobs).fit(data[X], data[y]).predict(data[X])
         return r
+
+def covar_correct(X, Y, data, n_jobs=nj):
     
     R = Parallel(n_jobs=n_jobs)(delayed(get_resid)(X, y, data, n_jobs=n_jobs) for y in Y)
     return np.asanyarray(R).T
@@ -42,13 +43,13 @@ subcortical_structures = pd.Series(subcortical_structures.str.split('_')).apply(
 
 data = demographics[covariate_columns].merge(thickness_volume, left_index=True, right_index=True)
                                
-X = ['Age', 'Hand']
+X = ['Age']
 Y = cortical_regions[np.isin(cortical_regions, thickness_volume.columns)]
 residuals = thickness_volume.copy()
 residuals[Y] = covar_correct(X, Y, data, n_jobs=nj)
 
 
-X = ['Age', 'Hand', 'Icv']
+X = ['Age', 'Icv']
 Y = subcortical_structures[np.isin(subcortical_structures, thickness_volume.columns)]
 residuals = thickness_volume.copy()
 residuals[Y] = covar_correct(X, Y, data, n_jobs=nj)
